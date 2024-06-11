@@ -1,5 +1,6 @@
 import app from '@adonisjs/core/services/app'
 import { HttpContext, ExceptionHandler } from '@adonisjs/core/http'
+import ApiResponse from '../Helpers/ApiResponse.js'
 
 export default class HttpExceptionHandler extends ExceptionHandler {
   /**
@@ -12,8 +13,30 @@ export default class HttpExceptionHandler extends ExceptionHandler {
    * The method is used for handling errors and returning
    * response to the client
    */
-  async handle(error: unknown, ctx: HttpContext) {
-    return super.handle(error, ctx)
+  async handle(error: any, ctx: HttpContext) {
+    /**
+     * Self handle the validation exception
+     */
+    if (error.code === 'E_VALIDATION_FAILURE') {
+      return ApiResponse.validationError(ctx.response, error.messages.errors)
+    }
+
+    if (error.code === 'E_ROUTE_NOT_FOUND') {
+      return ApiResponse.notFound(ctx.response, error.message)
+    }
+
+    if (error.code === 'E_INVALID_API_TOKEN') {
+      return ApiResponse.unauthorized(ctx.response, error.message)
+    }
+
+    if (error.code === 'E_UNAUTHORIZED_ACCESS') {
+      return ApiResponse.unauthorized(ctx.response, error.message)
+    }
+
+    /**
+     * Forward rest of the exceptions to the parent class
+     */
+    return ApiResponse.internalServerError(ctx.response, error.message, error.stack)
   }
 
   /**
