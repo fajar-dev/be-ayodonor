@@ -7,7 +7,8 @@
 |
 */
 
-const ContactsController = () => import('#controllers/contacts_controller')
+const NewsController = () => import('#controllers/news_controller')
+const BloodDonorUnitsController = () => import('#controllers/blood_donor_units_controller')
 import router from '@adonisjs/core/services/router'
 
 router.get('/', async () => {
@@ -18,4 +19,6 @@ router.get('/', async () => {
   }
 })
 
-router.get('/contact', [ContactsController, 'index'])
+router.get('/blood-donor-unit', [BloodDonorUnitsController, 'index'])
+router.get('/news', [NewsController, 'index'])
+router.get('/news/:id', [NewsController, 'show'])

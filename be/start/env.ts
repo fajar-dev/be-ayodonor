@@ -23,9 +23,15 @@ export default await Env.create(new URL('../', import.meta.url), {
   | Variables for configuring database connection
   |----------------------------------------------------------
   */
-  DB_HOST: Env.schema.string({ format: 'host' }),
-  DB_PORT: Env.schema.number(),
-  DB_USER: Env.schema.string(),
-  DB_PASSWORD: Env.schema.string.optional(),
-  DB_DATABASE: Env.schema.string()
+  DB_HOST_MASTER: Env.schema.string({ format: 'host' }),
+  DB_PORT_MASTER: Env.schema.number(),
+  DB_USER_MASTER: Env.schema.string(),
+  DB_PASSWORD_MASTER: Env.schema.string.optional(),
+  DB_DATABASE_MASTER: Env.schema.string(),
+
+  DB_HOST_SLAVE: Env.schema.string({ format: 'host' }),
+  DB_PORT_SLAVE: Env.schema.number(),
+  DB_USER_SLAVE: Env.schema.string(),
+  DB_PASSWORD_SLAVE: Env.schema.string.optional(),
+  DB_DATABASE_SLAVE: Env.schema.string(),
 })
