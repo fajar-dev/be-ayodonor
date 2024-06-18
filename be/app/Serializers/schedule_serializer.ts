@@ -1,15 +1,17 @@
-import BloodDonorUnit from '#models/blood_donor_unit'
+import Schedule from '#models/schedule'
 import { ModelPaginatorContract } from '@adonisjs/lucid/types/model'
+import { DateTime } from 'luxon'
 
-interface BloodDonorUnitSerializerInterface {
+interface ScheduleSerializerInterface {
   id: number
-  name: string
+  instances: string
   address: string
-  province: string
-  telp: string
+  date: DateTime
+  target: number
   latitude: string
   longitude: string
   maps: string
+  bloodDonorUnit: object
 }
 
 interface PaginatedResponse {
@@ -24,27 +26,31 @@ interface PaginatedResponse {
     next_page_url: string | null
     previous_page_url: string | null
   }
-  data: BloodDonorUnitSerializerInterface[]
+  data: ScheduleSerializerInterface[]
 }
 
-export default class BloodDonorUnitSerializer {
-  static single(data: BloodDonorUnit): BloodDonorUnitSerializerInterface {
+export default class ScheduleSerializer {
+  static single(data: Schedule): ScheduleSerializerInterface {
     return {
       id: data.id,
-      name: data.nama,
+      instances: data.instansi,
       address: data.alamat,
-      province: data.provinsi,
-      telp: data.telp,
+      date: data.TglPenjadwalan,
+      target: data.jumlah,
       latitude: data.lat,
       longitude: data.lng,
       maps: 'https://www.google.com/maps?q=' + data.lat + ',' + data.lng,
+      bloodDonorUnit: {
+        id: data.bloodDonorUnit.id,
+        name: data.bloodDonorUnit.nama,
+      },
     }
   }
 
-  static collection(datas: ModelPaginatorContract<BloodDonorUnit>): PaginatedResponse {
+  static collection(datas: ModelPaginatorContract<Schedule>): PaginatedResponse {
     return {
       meta: datas.getMeta(),
-      data: datas.all().map((data: BloodDonorUnit) => this.single(data)),
+      data: datas.all().map((data: Schedule) => this.single(data)),
     }
   }
 }

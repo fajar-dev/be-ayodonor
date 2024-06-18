@@ -10,7 +10,6 @@ export default class BloodDonorUnitsController {
     const limit = request.input('limit', 10)
     const data = await BloodDonorUnit.query().where('nama', 'LIKE', `%${q}%`).paginate(page, limit)
 
-    // return data
     return ApiResponse.ok(
       response,
       BloodDonorUnitSerializer.collection(data),

@@ -1,6 +1,4 @@
-import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
-// import News from './news.js'
-// import { HasMany } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column } from '@adonisjs/lucid/orm'
 
 export default class BloodDonorUnit extends BaseModel {
   static get table() {
@@ -31,9 +29,4 @@ export default class BloodDonorUnit extends BaseModel {
 
   @column()
   declare lng: string
-
-  // @hasMany(() => News, {
-  //   foreignKey: 'udd', // Define the foreign key for the relationship
-  // })
-  // declare news: HasMany <typeof News>
 }

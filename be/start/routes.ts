@@ -9,6 +9,7 @@
 
 const NewsController = () => import('#controllers/news_controller')
 const BloodDonorUnitsController = () => import('#controllers/blood_donor_units_controller')
+const SchedulesController = () => import('#controllers/schedules_controller')
 import router from '@adonisjs/core/services/router'
 
 router.get('/', async () => {
@@ -18,7 +19,11 @@ router.get('/', async () => {
     type: process.env.NODE_ENV,
   }
 })
-
-router.get('/blood-donor-unit', [BloodDonorUnitsController, 'index'])
-router.get('/news', [NewsController, 'index'])
-router.get('/news/:id', [NewsController, 'show'])
+router
+  .group(() => {
+    router.get('/blood-donor-unit', [BloodDonorUnitsController, 'index'])
+    router.get('/news', [NewsController, 'index'])
+    router.get('/news/:id', [NewsController, 'show'])
+    router.get('/schedule', [SchedulesController, 'index'])
+  })
+  .prefix('/v1')
