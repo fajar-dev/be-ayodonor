@@ -17,6 +17,7 @@ export default class NewsController {
       .if(bloodDonorUnitId, (query) => {
         query.where('udd', bloodDonorUnitId)
       })
+      .orderBy('tgl', 'desc')
       .paginate(page, limit)
 
     return ApiResponse.ok(response, NewsSerializer.collection(data), 'News retrieved successfully')
