@@ -1,5 +1,6 @@
 import { ModelPaginatorContract } from '@adonisjs/lucid/types/model'
 import News from '#models/news'
+import router from '@adonisjs/core/services/router'
 
 interface NewsSerializerInterface {
   id: number
@@ -33,7 +34,7 @@ export default class NewsSerializer {
       id: data.id,
       title: data.judul,
       content: data.berita,
-      image: 'https://dbdonor.pmi.or.id/pmi/berita/' + data.gambar,
+      image: router.builder().params([data.gambar]).make('image'),
       date: data.tgl,
       author: data.penulis,
       isActive: data.aktif ? true : false,

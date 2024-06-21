@@ -11,6 +11,7 @@ const NewsController = () => import('#controllers/news_controller')
 const BloodDonorUnitsController = () => import('#controllers/blood_donor_units_controller')
 const SchedulesController = () => import('#controllers/schedules_controller')
 const StocksController = () => import('#controllers/stocks_controller')
+const ImageProxiesController = () => import('#controllers/image_proxies_controller')
 import router from '@adonisjs/core/services/router'
 
 router.get('/', async () => {
@@ -30,3 +31,5 @@ router
     router.get('/stock/:id', [StocksController, 'show'])
   })
   .prefix('/v1')
+
+router.get('/images/:img', [ImageProxiesController, 'index']).as('image')
