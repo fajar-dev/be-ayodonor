@@ -2,7 +2,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import axios from 'axios'
 
 export default class ImageProxiesController {
-  async index({ response, params, request }: HttpContext) {
+  async index({ response, params }: HttpContext) {
     const imageUrl = 'https://dbdonor.pmi.or.id/pmi/berita/' + params.img
 
     try {
