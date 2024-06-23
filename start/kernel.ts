@@ -8,7 +8,6 @@
 |
 */
 
-import logger from '@adonisjs/core/services/logger'
 import router from '@adonisjs/core/services/router'
 import server from '@adonisjs/core/services/server'
 
