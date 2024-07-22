@@ -27,12 +27,19 @@ router.get('/docs', async () => {
 router.get('/', async () => {
   return {
     projects: process.env.APP_NAME,
-    version: process.env.APP_VERSION,
+    lastVersion: process.env.APP_VERSION,
     type: process.env.NODE_ENV,
   }
 })
 router
   .group(() => {
+    router.get('/', async () => {
+      return {
+        projects: process.env.APP_NAME,
+        version: process.env.APP_VERSION,
+        type: process.env.NODE_ENV,
+      }
+    })
     router.get('/blood-donor-unit', [BloodDonorUnitsController, 'index'])
     router.get('/news', [NewsController, 'index'])
     router.get('/news/:id', [NewsController, 'show'])

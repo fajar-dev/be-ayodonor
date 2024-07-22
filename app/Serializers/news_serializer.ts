@@ -34,7 +34,8 @@ export default class NewsSerializer {
       id: data.id,
       title: data.judul,
       content: data.berita,
-      image: router.builder().params([data.gambar]).make('image'),
+      image:
+        'https://api.donor-darah.online' + router.builder().params([data.gambar]).make('image'),
       date: data.tgl,
       author: data.penulis,
       isActive: data.aktif ? true : false,
